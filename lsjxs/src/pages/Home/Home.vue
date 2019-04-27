@@ -1,13 +1,16 @@
 <template>
     <div>
         <home-header :swiperindex = "swiperIndex" @changeIndex="getSwiperIndex"></home-header>
-        <home-swiper :swiperindex = "swiperIndex" @changeSwiper="getSwiperIndex"></home-swiper>
+        <home-swiper :swiperindex = "swiperIndex" @changeSwiper="getSwiperIndex">
+            <home-collect slot="collect"></home-collect>
+        </home-swiper>
     </div>
 </template>
 
 <script>
 import HomeHeader from './components/HomeHeader'
 import HomeSwiper from './components/HomeSwiper'
+import HomeCollect from './components/HomeCollect'
 export default {
     name: 'Home',
     data () {
@@ -17,7 +20,8 @@ export default {
     },
     components:{
         HomeHeader,
-        HomeSwiper
+        HomeSwiper,
+        HomeCollect
     },
     methods: {
         getSwiperIndex(i){
