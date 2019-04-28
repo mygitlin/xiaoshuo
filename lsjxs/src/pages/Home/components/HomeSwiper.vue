@@ -1,7 +1,7 @@
 <template>
-    <swiper :options="swiperOption" ref="mySwiper" @slideChangeTransitionStart="_changeSwiperIndex">
+    <swiper class="HomeSwiper" :options="swiperOption" ref="mySwiper" @slideChangeTransitionStart="_changeSwiperIndex">
         <!-- slides -->
-        <swiper-slide>1
+        <swiper-slide>
             <slot name="collect"></slot>
         </swiper-slide>
         <swiper-slide>2
@@ -88,5 +88,13 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+    .HomeSwiper
+        width 100%
+        position fixed
+        top 216px
+        left 0
+        right 0
+        bottom 0
+</style>
 

@@ -16,9 +16,9 @@
             </div>
         </div>
         <div class="home-header-tabBar">
-            <div :class="[select_tabBar == 0 ? 'home-header-tabBar-select': '']" @click="_handleTabBar(0)"><span>追书{{select_tabBar}}</span></div>
-            <div :class="[select_tabBar == 1 ? 'home-header-tabBar-select': '']" @click="_handleTabBar(1)"><span>社区{{select_tabBar}}</span></div>
-            <div :class="[select_tabBar == 2 ? 'home-header-tabBar-select': '']" @click="_handleTabBar(2)"><span>发现{{select_tabBar}}</span></div>
+            <div :class="[select_tabBar == 0 ? 'home-header-tabBar-select': '']" @click="_handleTabBar(0)"><span>追书</span></div>
+            <div :class="[select_tabBar == 1 ? 'home-header-tabBar-select': '']" @click="_handleTabBar(1)"><span>社区</span></div>
+            <div :class="[select_tabBar == 2 ? 'home-header-tabBar-select': '']" @click="_handleTabBar(2)"><span>发现</span></div>
         </div>
         <div class="home-header-bottom" :class="[select_tabBar==0?'home-header-bottom-left1':select_tabBar==1?'home-header-bottom-left2':'home-header-bottom-left3']"></div>
     </div>
@@ -67,10 +67,11 @@
 </script>
 
 <style lang="stylus" scoped>
-    @import '//at.alicdn.com/t/font_1163411_h5gt8vgtlu.css';
+@import '~@/assets/styles/styles.styl';
+@import '//at.alicdn.com/t/font_1163411_h5gt8vgtlu.css';
     .home-header
         height 216px
-        background-color #bf3a29
+        background-color $bg1
         position relative
         .home-header-bottom
             display:block
