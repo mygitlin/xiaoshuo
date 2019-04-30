@@ -7,7 +7,8 @@
                 <i v-if="loading==4" class="iconfont iconchenggong"></i>
                 <i v-if="loading==-1" class="iconfont icon71shibai"></i>
             </div>
-            <slot></slot>
+            <slot name="list"></slot>
+            <slot name="add"></slot>
         </ul>
     </div>
 </template>
@@ -87,30 +88,26 @@
                 this.bscroll.autoPullDownRefresh()
                 this.bscroll.on('scrollStart', () => {
                     this.loading = 1;
-                    this.bscroll.finishPullDown();
-                })
-                this.bscroll.on('scrollEnd', () => {
-                    this.bscroll.stop();
-                })
-                this.bscroll.on('touchEnd', () => {
-                    this.bscroll.stop();
                 })
 
                 this.bscroll.on('scroll', (pos) => {
-                    if(this.loading != 1){
+                    if(this.loading != 1 && this.loading != 2){
                         return;
                     }
                     let tops = wrapper.offsetTop;
                     // 使用abs绝对值（否则 pos.y拿到值是负数）
                     let is_top = Math.abs(Math.round(pos.y));
+                    // console.log(is_top)
                     if(this.loading==1&&is_top>=30){
-                        console.log('箭头变向'+this.loading)
+                        // console.log('箭头变向'+this.loading)
                         this.loading = 2;
-                        this.bscroll.stop();
+                    }else if(this.loading==2&&is_top<20){
+                        this.loading = 1;
                     }
                 })
 
                 this.bscroll.on('pullingDown', () => {
+                    console.log('下拉刷新')
                     this.loading = 3;
                     this.$emit('pullingDown');
                     // this.bscroll.finishPullDown();
@@ -121,17 +118,19 @@
                 let that = this;
                 if(this.success){
                     this.loading = 4;
-                    setTimeout(()=>{
-                        that.bscroll.finishPullDown(); // 事情做完，需要调用此方法告诉 better-scroll 数据已加载，否则下拉事件只会执行一次
-                    },500)
-                    return false;
+                    console.log('刷新成功'+this.loading)
+                    this.$nextTick(()=>{
+                        this.bscroll.finishPullDown(); // 事情做完，需要调用此方法告诉 better-scroll 数据已加载，否则下拉事件只会执行一次
+                        this.bscroll.refresh();
+                    })
                 }
                 if(this.error){
                     this.loading = -1;
-                    setTimeout(()=>{
-                        that.bscroll.finishPullDown(); // 事情做完，需要调用此方法告诉 better-scroll 数据已加载，否则下拉事件只会执行一次
-                    },500)
-                    return false;
+                    console.log('刷新失败'+this.loading)
+                    this.$nextTick(()=>{
+                        this.bscroll.finishPullDown(); // 事情做完，需要调用此方法告诉 better-scroll 数据已加载，否则下拉事件只会执行一次
+                        this.bscroll.refresh();
+                    })
                 }
             }
         }

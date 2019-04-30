@@ -30,7 +30,7 @@ export default {
     created () {
     // 生命周期钩子：组件实例创建完成，属性已绑定，但 DOM 还未生成， 属性还不存在
     // 初始化渲染页面
-        console.log(this.item)
+        // console.log(this.item)
         this.book = this.item;
     },
     beforeMount () {
